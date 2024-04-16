@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First VR Project</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://gftruj.github.io/webzamples/aframe/controls/oculus-thumbstick-controls.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="sceneSetup.js" defer></script>  
+</head>
+<body>
+    <!-- adding the scene -->
+    <a-scene>
+      <!--  -->
+      <!--  -->
+    <a-assets  timeout="10000">
+      <!-- arrows -->
+            <img id="right-arrow-texture" src="./arrow-right.png">
+            <img id="left-arrow-texture" src="./arrow-left.png">
+            <!-- adding skybox asset -->
+            <img id="skyTexture"
+            src="./elden_ring_farum_azula.webp">
+            <!-- adding ground asset -->
+            <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+<!-- solaire model -->
+<a-asset-item id="solaire"  src="./solaire.glb"></a-asset-item>
+<a-asset-item id="artorias" src="./artorias_and_sif.glb"></a-asset-item>
+</a-assets>
+<!--  -->
+<!--  -->
+       <!-- left and right buttons -->
+        <a-box
+        id="left-button"
+        src="#right-arrow-texture"
+        position="-2 1 -5"
+        rotation="180 0 0"
+        scale="1 1 0.01"></a-box>
+        <a-box
+        id="right-button"
+        src="#right-arrow-texture"
+        position="2 1 -5"
+        rotation="0 0 0"
+        scale="1 1 0.01"></a-box>
+        <!-- boss card -->
+        <a-box
+        id="bossCard"
+        src="#boxTexture"
+        position="0 1 -5"
+        rotation="0 0 0"
+        scale="2 5 0.1"
+        animation__position="property: object3D.position.y; to: 2.1; dir: alternate; dur: 2000; loop: true"
+        animation__mouseenter="property: scale; to: 2.3 2.3 2.3; dur: 300; startEvents: mouseenter"
+        animation__mouseleave="property: scale; to: 2 2 2; dur: 300; startEvents: mouseleave"></a-box>
+        <!-- skybox  -->
+          <a-sky src="#skyTexture"></a-sky>
+<!-- ground  -->
+          <!-- <a-plane src="#groundTexture" rotation="-90 0 0" width="10" height="10"
+          repeat="10 10"></a-plane> -->
+<!-- controllers -->
+<a-entity oculus-touch-controls="hand: left" oculus-thumbstick-controls></a-entity>
+<a-entity oculus-touch-controls="hand: right" oculus-thumbstick-controls></a-entity>
+<!-- lighting -->
+        <a-entity light="type: ambient; color: #FFF;"></a-entity>
+        <a-entity light="type: directional; color: #EEE; intensity: 1" position="0 2 0"></a-entity>
+        <!-- solaire -->
+        <a-entity gltf-model="#solaire" scale="1 1 1" rotation="0 90 0" position="2 -2 2"></a-entity>
+       <!-- artorias -->
+       <a-entity gltf-model="#artorias" scale="2 2 2" rotation="0 60 0" position="-1 -1 -1"></a-entity>
+        <!-- cursor interaction -->
+        <a-entity id="rig">
+          <a-camera position="0 1.6 0"></a-camera>
+        </a-entity>
+        <a-entity oculus-touch-controls="hand: left"></a-entity>
+        <a-entity oculus-touch-controls="hand: right"></a-entity>
+          <!-- adding text -->
+          <a-entity
+          id="bossText"
+          text="value: CodingAndQuesting; color: #BBB"
+          position="1.75 5 -5"
+          rotation="0 0 0"
+          scale="5 5 5"></a-entity>
+  <!-- rig component for camera -->
+  <a-entity id="rig" move-camera-rig></a-entity>
+              <!-- end of scene -->
+        </a-scene>
+</body>
+</html>
