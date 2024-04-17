@@ -1,8 +1,8 @@
+
 let bosses;
 async function getBosses(bosses) {
     const response = await fetch('./bosses.json');
     bosses = await response.json();
-    console.log(bosses);
     setupScene(bosses);
 }
 getBosses(bosses);
@@ -42,6 +42,3 @@ function setBossCard(bosses) {
     bossText.setAttribute('text', `value: ${bosses[0].name}; color: #000`);
 }
 
-function setBoss(btnDirection, bosses) {
-
-}
