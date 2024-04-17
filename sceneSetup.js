@@ -8,27 +8,27 @@ async function getBosses(bosses) {
 getBosses(bosses);
 
 function setupScene(bosses) {
-    document.querySelector('[oculus-touch-controls="hand: left"]').addEventListener('axismove', function (event) {
-        var x = event.detail.x;
-        var y = event.detail.y;
-        var rig = document.querySelector('#rig'); 
-        rig.setAttribute('position', {
-          x: rig.getAttribute('position').x + x * 0.1, 
-          y: rig.getAttribute('position').y,
-          z: rig.getAttribute('position').z + y * 0.1
-        });
-      });
+    // document.querySelector('[oculus-touch-controls="hand: left"]').addEventListener('axismove', function (event) {
+    //     var x = event.detail.x;
+    //     var y = event.detail.y;
+    //     var rig = document.querySelector('#rig'); 
+    //     rig.setAttribute('position', {
+    //       x: rig.getAttribute('position').x + x * 0.1, 
+    //       y: rig.getAttribute('position').y,
+    //       z: rig.getAttribute('position').z + y * 0.1
+    //     });
+    //   });
     
-      AFRAME.registerComponent('move-camera-rig', {
-        init: function () {
-            this.el.addEventListener('thumbstickmoved', (event) => {
-                var rig = document.querySelector('#rig');
-                var delta = event.detail.delta;
-                rig.object3D.position.x += delta.x * 0.1;
-                rig.object3D.position.z += delta.y * 0.1;
-            });
-        }
-    });
+    //   AFRAME.registerComponent('move-camera-rig', {
+    //     init: function () {
+    //         this.el.addEventListener('thumbstickmoved', (event) => {
+    //             var rig = document.querySelector('#rig');
+    //             var delta = event.detail.delta;
+    //             rig.object3D.position.x += delta.x * 0.1;
+    //             rig.object3D.position.z += delta.y * 0.1;
+    //         });
+    //     }
+    // });
     setBossCard(bosses);
 }
 
