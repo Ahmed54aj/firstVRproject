@@ -8,27 +8,6 @@ async function getBosses(bosses) {
 getBosses(bosses);
 
 function setupScene(bosses) {
-    // document.querySelector('[oculus-touch-controls="hand: left"]').addEventListener('axismove', function (event) {
-    //     var x = event.detail.x;
-    //     var y = event.detail.y;
-    //     var rig = document.querySelector('#rig'); 
-    //     rig.setAttribute('position', {
-    //       x: rig.getAttribute('position').x + x * 0.1, 
-    //       y: rig.getAttribute('position').y,
-    //       z: rig.getAttribute('position').z + y * 0.1
-    //     });
-    //   });
-    
-    //   AFRAME.registerComponent('move-camera-rig', {
-    //     init: function () {
-    //         this.el.addEventListener('thumbstickmoved', (event) => {
-    //             var rig = document.querySelector('#rig');
-    //             var delta = event.detail.delta;
-    //             rig.object3D.position.x += delta.x * 0.1;
-    //             rig.object3D.position.z += delta.y * 0.1;
-    //         });
-    //     }
-    // });
     setBossCard(bosses);
 }
 
@@ -42,3 +21,21 @@ function setBossCard(bosses) {
     bossText.setAttribute('text', `value: ${bosses[0].name}; color: #000`);
 }
 
+AFRAME.registerComponent('rotate-camera-with-thumbstick', {
+    init: function () {
+       this.el.addEventListener('thumbstickmoved', this.rotateCamera.bind(this));
+    },
+   
+    rotateCamera: function (event) {
+       // Assuming the thumbstick values are normalized between -1 and 1
+       var rotationSpeed = 0.01; // Adjust this value to change the rotation speed
+       var rotationAmount = event.detail.x * rotationSpeed;
+   
+       // Get the camera entity
+       var cameraEl = document.querySelector('a-camera');
+   
+       // Apply rotation to the camera
+       cameraEl.object3D.rotation.y += rotationAmount;
+    }
+   });
+   
