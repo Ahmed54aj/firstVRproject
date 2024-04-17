@@ -3,13 +3,9 @@ let bosses;
 async function getBosses(bosses) {
     const response = await fetch('./bosses.json');
     bosses = await response.json();
-    setupScene(bosses);
-}
-getBosses(bosses);
-
-function setupScene(bosses) {
     setBossCard(bosses);
 }
+getBosses(bosses);
 
 
 function setBossCard(bosses) {
@@ -21,21 +17,31 @@ function setBossCard(bosses) {
     bossText.setAttribute('text', `value: ${bosses[0].name}; color: #000`);
 }
 
-AFRAME.registerComponent('rotate-camera-with-thumbstick', {
-    init: function () {
-       this.el.addEventListener('thumbstickmoved', this.rotateCamera.bind(this));
-    },
-   
-    rotateCamera: function (event) {
-       // Assuming the thumbstick values are normalized between -1 and 1
-       var rotationSpeed = 0.01; // Adjust this value to change the rotation speed
-       var rotationAmount = event.detail.x * rotationSpeed;
-   
-       // Get the camera entity
-       var cameraEl = document.querySelector('a-camera');
-   
-       // Apply rotation to the camera
-       cameraEl.object3D.rotation.y += rotationAmount;
-    }
-   });
-   
+// Select the left and right Oculus Touch controllers
+const leftController = document.querySelector('[oculus-touch-controls="hand: left"]');
+const rightController = document.querySelector('[oculus-touch-controls="hand: right"]');
+
+// Add event listener for triggerdown on the left controller
+leftController.addEventListener('triggerdown', function() {
+ const bossText = document.getElementById('bossText');
+ bossText.setAttribute('text', `value: left triggerdown; color: #000`);
+ // Add your logic here for when the left trigger is pressed
+});
+
+// Add event listener for triggerdown on the right controller
+rightController.addEventListener('triggerdown', function() {
+    const bossText = document.getElementById('bossText');
+    bossText.setAttribute('text', `value: right triggerdown; color: #000`);
+});
+
+// Add event listener for gripdown on the left controller
+leftController.addEventListener('gripdown', function() {
+    const bossText = document.getElementById('bossText');
+    bossText.setAttribute('text', `value: left gripdown; color: #000`);
+});
+
+// Add event listener for gripdown on the right controller
+rightController.addEventListener('gripdown', function() {
+    const bossText = document.getElementById('bossText');
+    bossText.setAttribute('text', `value: right gripdown; color: #000`);
+});
