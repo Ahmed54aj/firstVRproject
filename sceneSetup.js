@@ -20,18 +20,28 @@ function setBossCard(bosses) {
 // Select the left and right Oculus Touch controllers
 const leftController = document.querySelector('[oculus-touch-controls="hand: left"]');
 const rightController = document.querySelector('[oculus-touch-controls="hand: right"]');
-
+rightController.setAttribute('raycaster', 'objects: .buttons');
+leftController.setAttribute('raycaster', 'objects: .buttons');
 // Add event listener for triggerdown on the left controller
 leftController.addEventListener('triggerdown', function() {
- const bossText = document.getElementById('bossText');
- bossText.setAttribute('text', `value: left triggerdown; color: #000`);
- // Add your logic here for when the left trigger is pressed
+    const raycaster = leftController.components.raycaster;
+    const bossText = document.getElementById('bossText');
+    if (raycaster.intersectedEls.length > 0) {
+        bossText.setAttribute('text', `value: button is clicked; color: #000`);
+     } else {
+        bossText.setAttribute('text', `value: button not clicked; color: #000`);
+     }
 });
 
 // Add event listener for triggerdown on the right controller
 rightController.addEventListener('triggerdown', function() {
+    const raycaster = rightController.components.raycaster;
     const bossText = document.getElementById('bossText');
-    bossText.setAttribute('text', `value: right triggerdown; color: #000`);
+    if (raycaster.intersectedEls.length > 0) {
+        bossText.setAttribute('text', `value: button is clicked; color: #000`);
+     } else {
+        bossText.setAttribute('text', `value: button not clicked; color: #000`);
+     }
 });
 
 // Add event listener for gripdown on the left controller
