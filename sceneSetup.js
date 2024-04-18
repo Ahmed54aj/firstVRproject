@@ -16,9 +16,7 @@ function setBossCard(bosses) {
 }
 // Select the left and right Oculus Touch controllers
 const leftController = document.querySelector('[oculus-touch-controls="hand: left"]');
-const leftRaycaster = leftController.components.raycaster;
 const rightController = document.querySelector('[oculus-touch-controls="hand: right"]');
-const rightRaycaster = rightController.components.raycaster;
 rightController.setAttribute('raycaster', 'objects: .buttons');
 leftController.setAttribute('raycaster', 'objects: .buttons');
 // Add event listener for triggerdown on the left controller
