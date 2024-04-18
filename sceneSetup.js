@@ -24,7 +24,7 @@ leftController.setAttribute('raycaster', 'objects: .buttons');
 // Add event listener for triggerdown on the left controller
 leftController.addEventListener('triggerdown', function() {
     const bossText = document.getElementById('bossText');
-    if (raycaster.intersectedEls.length > 0) {
+    if (leftRaycaster.intersectedEls.length > 0) {
         bossText.setAttribute('text', `value: button is clicked; color: #000`);
      } else {
         bossText.setAttribute('text', `value: button not clicked; color: #000`);
@@ -34,7 +34,7 @@ leftController.addEventListener('triggerdown', function() {
 // Add event listener for triggerdown on the right controller
 rightController.addEventListener('triggerdown', function() {
     const bossText = document.getElementById('bossText');
-    if (raycaster.intersectedEls.length > 0) {
+    if (rightRaycaster.intersectedEls.length > 0) {
         bossText.setAttribute('text', `value: button is clicked; color: #000`);
      } else {
         bossText.setAttribute('text', `value: button not clicked; color: #000`);
