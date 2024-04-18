@@ -41,3 +41,26 @@ function setBossCard(bosses) {
 //     const bossText = document.getElementById('bossText');
 //     bossText.setAttribute('text', `value: right gripdown; color: #000`);
 // });
+function fixOculusTouchPose() {
+    // Adjust the raycaster direction for the Oculus Touch controls
+    AFRAME.components['laser-controls'].Component.prototype.config['oculus-touch-controls'].raycaster.direction.y = 0;
+   
+    document.addEventListener("DOMContentLoaded", function () {
+       document.querySelector("a-scene")
+         .addEventListener("loaded", function fixModelPoses() {
+           Array.from(document.querySelectorAll('[oculus-touch-controls]'))
+             .filter(el => el.components['oculus-touch-controls'].controllerPresent)
+             .forEach(el => {
+               el.addEventListener('model-loaded', () => {
+                 // Align the controller model with the raycaster
+                 var mesh = el.getObject3D('mesh');
+                 mesh.rotateX(Math.PI / 4);
+                 mesh.translateY(0.06);
+               });
+             });
+       });
+    });
+   }
+   
+   // Call the function to apply the fix
+   fixOculusTouchPose();
