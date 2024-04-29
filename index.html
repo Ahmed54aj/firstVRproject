@@ -21,11 +21,11 @@
             src="./elden_ring_farum_azula.webp">
             <!-- adding ground asset -->
             <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
-<!-- glb models -->
-<a-asset-item id="solaire"  src="./solaire.glb"></a-asset-item>
-<a-asset-item id="sword"  src="./sword.glb"></a-asset-item>
-<a-asset-item id="artorias" src="./artorias_and_sif.glb"></a-asset-item>
-</a-assets>
+      <!-- glb models -->
+            <a-asset-item id="solaire"  src="./solaire.glb"></a-asset-item>
+            <a-asset-item id="sword"  src="./sword.glb"></a-asset-item>
+            <a-asset-item id="artorias" src="./artorias_and_sif.glb"></a-asset-item>
+    </a-assets>
 <!--  -->
 <!--  -->
        <!-- left and right buttons -->
@@ -61,13 +61,17 @@
         <a-entity gltf-model="#solaire" scale="1 1 1" rotation="0 90 0" position="2 -2 2"></a-entity>
        <!-- artorias -->
        <a-entity gltf-model="#artorias" scale="2 2 2" rotation="0 -45 0" position="3 -1 0"></a-entity>
-        <!-- cursor interaction -->
+        <!-- grabbable sword  -->
+        <a-entity gltf-model="#sword" scale="0.1 0.1 0.1" rotation="180 0 20" position="0.5 2 -1" grabbable></a-entity>
+       <!-- cursor interaction -->
         <a-entity id="rig">
           <a-camera position="0 1.6 0"></a-camera>
         </a-entity>
-        <!-- hand controllers -->
-        <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
-        <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
+        <!-- hand tracking -->
+        <!-- <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
+        <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity> -->
+        <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;" hoverEnabled></a-entity>
+<a-entity id="rightHand" hand-tracking-grab-controls="hand: right;" hoverEnabled></a-entity>
           <!-- adding text -->
           <a-entity
           id="bossText"
