@@ -41,15 +41,3 @@ function setBossCard(bosses) {
 //     const bossText = document.getElementById('bossText');
 //     bossText.setAttribute('text', `value: right gripdown; color: #000`);
 // });
-
-AFRAME.registerComponent('custom-grab', {
-    tick: function () {
-       var handEl = this.el; // Assuming this component is attached to the hand entity
-       if (handEl.is('pinched')) {
-         var handPosition = handEl.components['hand-tracking-controls'].wristWorldPosition;
-         var handOrientation = handEl.components['hand-tracking-controls'].wristOrientation;
-         // Use handPosition and handOrientation to move or manipulate objects
-       }
-    }
-   });
-   
