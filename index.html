@@ -62,7 +62,7 @@
        <!-- artorias -->
        <a-entity gltf-model="#artorias" scale="2 2 2" rotation="0 -45 0" position="3 -1 0"></a-entity>
         <!-- grabbable sword  -->
-        <a-entity gltf-model="#sword" scale="0.1 0.1 0.1" rotation="180 0 20" position="0.5 2 -1" grabbable></a-entity>
+        <a-entity gltf-model="#sword" scale="0.1 0.1 0.1" rotation="180 0 20" position="0.25 2.2 -0.5" grabbable></a-entity>
        <!-- cursor interaction -->
         <a-entity id="rig">
           <a-camera position="0 1.6 0"></a-camera>
@@ -70,8 +70,10 @@
         <!-- hand tracking -->
         <!-- <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
         <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity> -->
-        <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;" hoverEnabled></a-entity>
-<a-entity id="rightHand" hand-tracking-grab-controls="hand: right;" hoverEnabled></a-entity>
+        <!-- <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;" hoverEnabled></a-entity>
+<a-entity id="rightHand" hand-tracking-grab-controls="hand: right;" hoverEnabled></a-entity> -->
+<a-entity hand-tracking-controls="hand: left" custom-grab></a-entity>
+<a-entity hand-tracking-controls="hand: right" custom-grab></a-entity>
           <!-- adding text -->
           <a-entity
           id="bossText"
