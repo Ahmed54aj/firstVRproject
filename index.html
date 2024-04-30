@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- adding the scene -->
-    <a-scene >
+    <a-scene obb-collider="showColliders: false">
       <!--  -->
       <!--  -->
     <a-assets  timeout="10000">
@@ -65,13 +65,15 @@
        <a-entity gltf-model="#artorias" scale="2 2 2" rotation="0 -45 0" position="3 -1 0"></a-entity>
         <!-- grabbable sword  -->
         <a-entity gltf-model="#sword" scale="0.1 0.1 0.1" rotation="180 0 20" position="0.25 2.2 -0.5" grabbable></a-entity>
-       <!-- cursor interaction -->
+        <a-entity id="fireball" gltf-model="#fireball" scale="0 0 0" position="0.25 2.2 -0.5" rotation="0 0 0 " animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; delay: 0; easing: linear"></a-entity>
+s
+        <!-- cursor interaction -->
         <a-entity id="rig">
           <a-camera position="0 1.6 0"></a-camera>
         </a-entity>
         <!-- hand tracking -->
-<a-entity oculus-touch-controls="hand: left"></a-entity>
-<a-entity oculus-touch-controls="hand: right"></a-entity>
+<a-entity id="left-hand" hand-tracking-grab-controls="hand: left"></a-entity>
+<a-entity hand-tracking-grab-controls="hand: right"></a-entity>
           <!-- adding text -->
           <a-entity
           id="bossText"
@@ -82,7 +84,6 @@
   <!-- rig component for camera -->
   <a-entity id="rig" move-camera-rig></a-entity>
   <!-- fireball for left hand -->
-  <a-entity id="fireball" scale="0.0 0.0 0.0" animation="property: rotation; to: 0 360 0; loop: true; dur: 1000"></a-entity>
               <!-- end of scene -->
         </a-scene>
 </body>
