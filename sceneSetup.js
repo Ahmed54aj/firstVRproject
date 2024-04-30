@@ -42,7 +42,7 @@ function setBossCard(bosses) {
 //     bossText.setAttribute('text', `value: right gripdown; color: #000`);
 // });
 const hand = document.getElementById("left-hand");
-hand.addEventListener("hand-tracking-extras", (evt) => {
+hand.addEventListener("hand-tracking-extras-ready", (evt) => {
  var jointsAPI = evt.detail.data.jointsAPI;
  var fistDetected = false;
 
