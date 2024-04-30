@@ -14,51 +14,38 @@ function setBossCard(bosses) {
     const bossText = document.getElementById('bossText');
     bossText.setAttribute('text', `value: ${bosses[0].name}; color: #000`);
 }
-// Select the left and right Oculus Touch controllers
-// const leftController = document.querySelector('[oculus-touch-controls="hand: left"]');
-// const rightController = document.querySelector('[oculus-touch-controls="hand: right"]');
-// // Add event listener for triggerdown on the left controller
-// leftController.addEventListener('triggerdown', function() {
-//     const bossText = document.getElementById('bossText');
-//         bossText.setAttribute('text', `value: button is clicked; color: #000`);
-//         bossText.setAttribute('text', `value: button not clicked; color: #000`);
-// });
 
-// // Add event listener for triggerdown on the right controller
-// rightController.addEventListener('triggerdown', function() {
-//     const bossText = document.getElementById('bossText');
-//         bossText.setAttribute('text', `value: button is clicked; color: #000`);
-// });
 
-// // Add event listener for gripdown on the left controller
-// leftController.addEventListener('gripdown', function() {
-//     const bossText = document.getElementById('bossText');
-//     bossText.setAttribute('text', `value: left gripdown; color: #000`);
-// });
 
-// // Add event listener for gripdown on the right controller
-// rightController.addEventListener('gripdown', function() {
-//     const bossText = document.getElementById('bossText');
-//     bossText.setAttribute('text', `value: right gripdown; color: #000`);
-// });
-const hand = document.getElementById("left-hand");
-hand.addEventListener("hand-tracking-extras-ready", (evt) => {
- var jointsAPI = evt.detail.data.jointsAPI;
- var fistDetected = false;
 
- hand.addEventListener("hand-tracking-extras-gesture", (gestureEvent) => {
-    if (gestureEvent.detail.gesture === "fist") {
-      fistDetected = true;
-      // Assuming you have a GLB object with the id "fireball"
-      var fireball = document.getElementById("fireball");
-      var wristPosition = jointsAPI.getWrist().getPosition();
-      fireball.setAttribute("position", `${wristPosition.x} ${wristPosition.y} ${wristPosition.z}`);
-      fireball.setAttribute("scale", "1 1 1");
-      fireball.emit("start-animation");
-    } else if (fistDetected && gestureEvent.detail.gesture === "open") {
-      fistDetected = false;
-      fireball.emit("stop-animation");
-      fireball.setAttribute("scale", "0 0 0");
+   AFRAME.registerComponent('update-fireball-position', {
+    init: function () {
+       this.isPinching = false;
+    },
+    tick: function () {
+       if (this.isPinching) {
+         this.el.setAttribute("position", `${pinchPosition.x} ${pinchPosition.y} ${pinchPosition.z}`);
+       }
     }
- });
+   });
+   
+
+   const hand = document.getElementById("left-hand");
+const fireball = document.getElementById("fireball");
+
+// Add the custom component to the fireball
+fireball.setAttribute('update-fireball-position', '');
+
+document.querySelector('#leftHand').addEventListener('gesture-pinch', function (event) {
+ fireball.setAttribute("scale", "1 1 1");
+ fireball.emit("start-animation");
+ // Set the isPinching flag to true
+ fireball.components['update-fireball-position'].isPinching = true;
+});
+
+document.querySelector('#leftHand').addEventListener('gesture-end', function (event) {
+ fireball.emit("stop-animation");
+ fireball.setAttribute("scale", "0 0 0");
+ // Set the isPinching flag to false
+ fireball.components['update-fireball-position'].isPinching = false;
 });
