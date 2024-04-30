@@ -54,9 +54,11 @@ hand.addEventListener("hand-tracking-extras-ready", (evt) => {
       var wristPosition = jointsAPI.getWrist().getPosition();
       fireball.setAttribute("position", `${wristPosition.x} ${wristPosition.y} ${wristPosition.z}`);
       fireball.setAttribute("scale", "1 1 1");
+      fireball.emit("start-animation");
     } else if (fistDetected && gestureEvent.detail.gesture === "open") {
       fistDetected = false;
-      // Optionally, hide or reset the fireball object
+      fireball.emit("stop-animation");
+      fireball.setAttribute("scale", "0 0 0");
     }
  });
 });
