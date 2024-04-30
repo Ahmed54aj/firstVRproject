@@ -18,16 +18,7 @@ function setBossCard(bosses) {
 
 
 
-   AFRAME.registerComponent('update-fireball-position', {
-    init: function () {
-       this.isPinching = false;
-    },
-    tick: function () {
-       if (this.isPinching) {
-         this.el.setAttribute("position", `${pinchPosition.x} ${pinchPosition.y} ${pinchPosition.z}`);
-       }
-    }
-   });
+   
    
 
    const hand = document.getElementById("left-hand");
@@ -36,16 +27,13 @@ const fireball = document.getElementById("fireball");
 // Add the custom component to the fireball
 fireball.setAttribute('update-fireball-position', '');
 
-document.querySelector('#leftHand').addEventListener('gesture-pinch', function (event) {
+document.querySelector('#leftHand').addEventListener('pinchstarted', function (event) {
  fireball.setAttribute("scale", "1 1 1");
+ fireball.position.set(1, 2, 1);
  fireball.emit("start-animation");
- // Set the isPinching flag to true
- fireball.components['update-fireball-position'].isPinching = true;
 });
 
-document.querySelector('#leftHand').addEventListener('gesture-end', function (event) {
+document.querySelector('#leftHand').addEventListener('pinchended', function (event) {
  fireball.emit("stop-animation");
  fireball.setAttribute("scale", "0 0 0");
- // Set the isPinching flag to false
- fireball.components['update-fireball-position'].isPinching = false;
 });
