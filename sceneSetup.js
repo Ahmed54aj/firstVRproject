@@ -13,27 +13,30 @@ function setBossCard(bosses) {
     //  text
     const bossText = document.getElementById('bossText');
     bossText.setAttribute('text', `value: ${bosses[0].name}; color: #000`);
+    setupHandEvents();
 }
 
 
 
 
+ function setupHandEvents() {
+    const hand = document.getElementById("left-hand");
+    const fireball = document.getElementById("fireball");
+    
+    // Add the custom component to the fireball
+    fireball.setAttribute('update-fireball-position', '');
+    
+    document.getElementById("left-hand").addEventListener('pinchstarted', function (event) {
+     fireball.setAttribute("scale", "1 1 1");
+     fireball.position.set(event.target.position);
+     fireball.emit("start-animation");
+    });
+    
+    document.getElementById('left-hand').addEventListener('pinchended', function (event) {
+     fireball.emit("stop-animation");
+     fireball.setAttribute("scale", "0 0 0");
+    });
+ }  
    
-   
 
-   const hand = document.getElementById("left-hand");
-const fireball = document.getElementById("fireball");
 
-// Add the custom component to the fireball
-fireball.setAttribute('update-fireball-position', '');
-
-document.querySelector('#leftHand').addEventListener('pinchstarted', function (event) {
- fireball.setAttribute("scale", "1 1 1");
- fireball.position.set(1, 2, 1);
- fireball.emit("start-animation");
-});
-
-document.querySelector('#leftHand').addEventListener('pinchended', function (event) {
- fireball.emit("stop-animation");
- fireball.setAttribute("scale", "0 0 0");
-});
