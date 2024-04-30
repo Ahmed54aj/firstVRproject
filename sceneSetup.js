@@ -41,3 +41,22 @@ function setBossCard(bosses) {
 //     const bossText = document.getElementById('bossText');
 //     bossText.setAttribute('text', `value: right gripdown; color: #000`);
 // });
+const hand = document.getElementById("left-hand");
+hand.addEventListener("hand-tracking-extras", (evt) => {
+ var jointsAPI = evt.detail.data.jointsAPI;
+ var fistDetected = false;
+
+ hand.addEventListener("hand-tracking-extras-gesture", (gestureEvent) => {
+    if (gestureEvent.detail.gesture === "fist") {
+      fistDetected = true;
+      // Assuming you have a GLB object with the id "fireball"
+      var fireball = document.getElementById("fireball");
+      var wristPosition = jointsAPI.getWrist().getPosition();
+      fireball.setAttribute("position", `${wristPosition.x} ${wristPosition.y} ${wristPosition.z}`);
+      fireball.setAttribute("scale", "1 1 1");
+    } else if (fistDetected && gestureEvent.detail.gesture === "open") {
+      fistDetected = false;
+      // Optionally, hide or reset the fireball object
+    }
+ });
+});
