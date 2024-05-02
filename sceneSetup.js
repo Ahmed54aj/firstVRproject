@@ -19,8 +19,8 @@ function setBossCard(bosses) {
 const leftHand = document.getElementById("left-hand");
 const fireball = document.getElementById("fireball");
     leftHand.addEventListener('gripdown', function (event) {
-    fireball.position.set(event.target.position);
-     fireball.setAttribute("scale", "1 1 1");
+    // fireball.position.set(event.target.position);
+     fireball.setAttribute("scale", "5 5 5");
     //  fireball.emit("start-animation");
      bossText.setAttribute('text', `value: left trigger down; color: #000`);
     });
