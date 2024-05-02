@@ -19,13 +19,18 @@ function setBossCard(bosses) {
 const leftHand = document.getElementById("left-hand");
 const fireball = document.getElementById("fireballObj");
     leftHand.addEventListener('gripdown', function (event) {
-    // fireball.position.set(event.target.position);
      fireball.setAttribute("scale", "2 2 2");
-     fireball.emit("start-animation");
      bossText.setAttribute('text', `value: left trigger down; color: #000`);
+     fireball.emit("start-animation");
+     relocateFireball(event);
     });
     leftHand.addEventListener('gripup', function (event) {
      fireball.emit("stop-animation");
      fireball.setAttribute("scale", "0 0 0");
      bossText.setAttribute('text', `value: left trigger up; color: #000`);
     });
+
+    function relocateFireball(hand) {
+        fireball.position.set(hand.target.position);
+        relocateFireball(hand);
+    }
