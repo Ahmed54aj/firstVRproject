@@ -20,7 +20,7 @@ const leftHand = document.getElementById("left-hand");
 const fireball = document.getElementById("fireballObj");
 
 leftHand.addEventListener('gripdown', function (event) {
-    fireball.setAttribute("scale", "2 2 2");
+    fireball.setAttribute("scale", "1 1 1");
     bossText.setAttribute('text', `value: left trigger down; color: #000`);
     fireball.emit("start-animation");
     leftHand.addEventListener('hand-pose', updateFireballPosition);
