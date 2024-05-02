@@ -23,14 +23,14 @@ function setBossCard(bosses) {
     const hand = document.getElementById("left-hand");
     const fireball = document.getElementById("fireball");
     hand.addEventListener('pinchstarted', function (event) {
-    fireball.position.set(event.target.position);
+    // fireball.position.set(event.target.position);
      fireball.setAttribute("scale", "1 1 1");
-     fireball.emit("start-animation");
+    //  fireball.emit("start-animation");
      bossText.setAttribute('text', `value: left hand pinch; color: #000`);
     });
     
     hand.addEventListener('pinchended', function (event) {
-     fireball.emit("stop-animation");
+    //  fireball.emit("stop-animation");
      fireball.setAttribute("scale", "0 0 0");
      bossText.setAttribute('text', `value: left hand let go; color: #000`);
     });
