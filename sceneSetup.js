@@ -18,19 +18,21 @@ function setBossCard(bosses) {
 
 const leftHand = document.getElementById("left-hand");
 const fireball = document.getElementById("fireballObj");
-    leftHand.addEventListener('gripdown', function (event) {
-     fireball.setAttribute("scale", "2 2 2");
-     bossText.setAttribute('text', `value: left trigger down; color: #000`);
-     fireball.emit("start-animation");
-     relocateFireball(event, fireball);
-    });
-    leftHand.addEventListener('gripup', function (event) {
-     fireball.emit("stop-animation");
-     fireball.setAttribute("scale", "0 0 0");
-     bossText.setAttribute('text', `value: left trigger up; color: #000`);
-    });
 
-    function relocateFireball(hand, fireball) {
-        fireball.setAttribute("position", hand.target.position);
-        relocateFireball(hand);
-    }
+leftHand.addEventListener('gripdown', function (event) {
+    fireball.setAttribute("scale", "2 2 2");
+    bossText.setAttribute('text', `value: left trigger down; color: #000`);
+    fireball.emit("start-animation");
+    leftHand.addEventListener('hand-pose', updateFireballPosition);
+});
+
+leftHand.addEventListener('gripup', function (event) {
+    fireball.emit("stop-animation");
+    fireball.setAttribute("scale", "0 0 0");
+    bossText.setAttribute('text', `value: left trigger up; color: #000`);
+    leftHand.removeEventListener('hand-pose', updateFireballPosition);
+});
+
+function updateFireballPosition(event) {
+    fireball.setAttribute("position", leftHand.getAttribute("position"));
+}
