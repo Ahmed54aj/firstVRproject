@@ -22,7 +22,7 @@ const fireball = document.getElementById("fireballObj");
      fireball.setAttribute("scale", "2 2 2");
      bossText.setAttribute('text', `value: left trigger down; color: #000`);
      fireball.emit("start-animation");
-     relocateFireball(event);
+     relocateFireball(event, fireball);
     });
     leftHand.addEventListener('gripup', function (event) {
      fireball.emit("stop-animation");
@@ -30,7 +30,7 @@ const fireball = document.getElementById("fireballObj");
      bossText.setAttribute('text', `value: left trigger up; color: #000`);
     });
 
-    function relocateFireball(hand) {
-        fireball.position.set(hand.target.position);
+    function relocateFireball(hand, fireball) {
+        fireball.setAttribute("position", hand.target.position);
         relocateFireball(hand);
     }
